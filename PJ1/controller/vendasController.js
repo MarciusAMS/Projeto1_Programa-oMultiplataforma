@@ -13,14 +13,13 @@ exports.adicionarVenda = async (req, res) => {
 } 
 
 
-// Carrega os dados do cliente para edição
 exports.editarVenda = async (req, res) => {
     const { id } = req.params;
     const vendas = await Venda.findByPk(id);
     res.render('editarVenda', { vendas });
 };
 
-// Atualiza os dados do cliente
+
 exports.alterarVenda = async (req, res) => {
     const { id } = req.params;
     const { cliente_id, data_venda, valor_total } = req.body;
@@ -28,7 +27,6 @@ exports.alterarVenda = async (req, res) => {
     res.redirect('/vendas');
 };
 
-// Exclui um cliente
 exports.excluirVenda = async (req, res) => {
     const { id } = req.params;
     await Venda.destroy({ where: { id } });

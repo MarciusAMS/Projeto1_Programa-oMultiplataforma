@@ -3,7 +3,7 @@ const Cliente = require('../Model/clientesModel.js');
 
 exports.listarClientes = async (req, res) => {
     const clientes = await Cliente.findAll();
-    res.render(clientes); // trocar por Render quando for usar EJS
+    res.render(clientes); // trocar por Render quando for usar EJS e JSON para teste em HTTP ou ISOMNIA
 };
 
 exports.adicionarCliente = async (req, res) => {
@@ -12,14 +12,14 @@ exports.adicionarCliente = async (req, res) => {
     res.render(cliente);
 };
 
-// Carrega os dados do cliente para edição
+
 exports.editarCliente = async (req, res) => {
     const { id } = req.params;
     const cliente = await Cliente.findByPk(id);
     res.render('editarCliente', { cliente });
 };
 
-// Atualiza os dados do cliente
+
 exports.alterarCliente = async (req, res) => {
     const { id } = req.params;
     const { nome, endereco, telefone, email } = req.body;
@@ -27,7 +27,7 @@ exports.alterarCliente = async (req, res) => {
     res.redirect('/clientes');
 };
 
-// Exclui um cliente
+
 exports.excluirCliente = async (req, res) => {
     const { id } = req.params;
     await Cliente.destroy({ where: { id } });

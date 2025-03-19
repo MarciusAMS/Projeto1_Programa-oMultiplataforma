@@ -13,14 +13,13 @@ exports.adicionarItemVenda = async (req, res) => {
 } 
 
 
-// Carrega os dados do cliente para edição
 exports.editarItemVenda = async (req, res) => {
     const { id } = req.params;
     const itens = await Item_Venda.findByPk(id);
     res.render('editarItemVenda', { itens });
 };
 
-// Atualiza os dados do cliente
+
 exports.alterarItemVenda = async (req, res) => {
     const { id } = req.params;
     const { venda_id, livro_id, quantidade, preco_unitario } = req.body;
@@ -28,7 +27,7 @@ exports.alterarItemVenda = async (req, res) => {
     res.redirect('/itens');
 };
 
-// Exclui um cliente
+
 exports.excluirItemVenda = async (req, res) => {
     const { id } = req.params;
     await Cliente.destroy({ where: { id } });
