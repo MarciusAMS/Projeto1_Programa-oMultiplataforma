@@ -2,9 +2,13 @@ const Cliente = require('../Model/clientesModel.js');
 
 
 exports.listarClientes = async (req, res) => {
-    const clientes = await Cliente.findAll();
-    res.render('consultaCliente'); // trocar por Render quando for usar EJS e JSON para teste em HTTP ou ISOMNIA
-  //  res.status(200).json(clientes);
+    try {
+        const clientes = await Cliente.findAll();
+        res.render('consultaCliente', { clientes: clientes || [] }); // Passando clientes para o EJS
+    } catch (error) {
+        console.error('Erro ao listar clientes:', error);
+        res.status(500).send('Erro ao carregar a página');
+    }
 };
 
 exports.adicionarCliente = async (req, res) => {
