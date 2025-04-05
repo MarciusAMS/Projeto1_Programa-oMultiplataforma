@@ -13,8 +13,13 @@ exports.listarClientes = async (req, res) => {
 
 exports.adicionarCliente = async (req, res) => {
     const { nome, endereco, telefone, email } = req.body;
-    const cliente = await Cliente.create({ nome, endereco, telefone, email });
-    res.render(cliente);
+    try{
+        await Cliente.create({ nome, endereco, telefone, email });
+    res.redirect('/api/clientes/novo');
+    } catch (error){
+        console.error('Erro ao adicionar cliente', error);
+        res.status(500).send('Erro ao adicionar cliente');
+    }
 };
 
 
@@ -29,12 +34,12 @@ exports.alterarCliente = async (req, res) => {
     const { id } = req.params;
     const { nome, endereco, telefone, email } = req.body;
     await Cliente.update({ nome, endereco, telefone, email }, { where: { id } });
-    res.redirect('/clientes');
+    res.redirect('/api/clientes');
 };
 
 
 exports.excluirCliente = async (req, res) => {
     const { id } = req.params;
     await Cliente.destroy({ where: { id } });
-    res.redirect('/clientes');
+    res.redirect('/api/clientes');
 };

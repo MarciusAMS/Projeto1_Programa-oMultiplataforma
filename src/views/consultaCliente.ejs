@@ -24,8 +24,8 @@
                 <td><%= cliente.telefone %></td>
                 <td><%= cliente.email %></td>
                 <td>
-                    <a href="/clientes/<%= cliente.id %>">Editar</a> |
-                    <form action="/clientes/<%= cliente.id %>?_method=DELETE" method="POST" style="display:inline;">
+                    <a href="/api/clientes/<%= cliente.id %>">Editar</a>
+                    <form action="/api/clientes/excluir/<%= cliente.id %>?_method=DELETE" method="POST" style="display:inline;">
                         <button type="submit">Excluir</button>
                     </form>
                 </td>
@@ -33,6 +33,6 @@
         <% }); %>
     </table>
     <br>
-    <a href="/clientes/novo">Adicionar Cliente</a>
+    <a href="/api/clientes/novo">Adicionar Cliente</a>
 </body>
 </html>

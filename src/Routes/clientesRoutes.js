@@ -5,11 +5,13 @@ const clientesController = require('../controller/clientesController');
 // Adaptar rotas, toda vez que chamar Alterar, Incluir chamar GET por estar consultando o banco.
 // Quando necessitar manipular os valores do banco usar POST, PUT, DELETE, etc.
 
+router.get('/novo', (req, res) => {res.render('adicionarCliente'); });
+
 router.get('/', clientesController.listarClientes);
-router.post('/', clientesController.adicionarCliente);
+router.post('/novo', clientesController.adicionarCliente);
 router.get('/:id', clientesController.editarCliente);
-router.put('/', clientesController.alterarCliente);
-router.delete('/', clientesController.excluirCliente);
+router.put('/:id', clientesController.alterarCliente);
+router.delete('/excluir/:id', clientesController.excluirCliente);
 
 
 module.exports = router;
