@@ -1,7 +1,16 @@
-const { DataTypes } = require('sequelize');
-const conexao = require('../database/bancoDados');
+const { Sequelize, DataTypes, Model } = require('sequelize');
 
-const Livros = conexao.define('Livros', {
+const sequelize = new Sequelize('Livraria', 'root', '', {
+    host: 'localhost',
+    port: 3306,
+    dialect: 'mysql'
+  });
+
+  sequelize.authenticate()
+  .then(() => console.log('Conexão bem-sucedida!'))
+  .catch(err => console.error('Erro ao conectar:', err));
+
+const Livros = sequelize.define('Livros', {
     id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
@@ -37,5 +46,9 @@ const Livros = conexao.define('Livros', {
         allowNull: false,
     },
 });
+
+sequelize.sync()
+  .then(() => console.log('Modelo sincronizado com o banco!'))
+  .catch(err => console.error('Erro ao sincronizar modelo:', err));
 
 module.exports = Livros;
