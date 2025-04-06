@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Editar Venda</title>
+    <link rel="stylesheet" href="/css/vendas/editarVendas.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Editar Venda</h1>
+        <form action="/api/vendas/<%= venda.id %>?_method=PUT" method="POST">
+            <label for="cliente_id">ID do Cliente:</label>
+            <input type="number" id="cliente_id" name="cliente_id" value="<%= venda.cliente_id %>" required>
+
+            <label for="data_venda">Data da Venda:</label>
+            <input type="date" id="data_venda" name="data_venda" value="<%= venda.data_venda %>" required>
+
+            <label for="valor_total">Valor Total:</label>
+            <input type="number" step="0.01" id="valor_total" name="valor_total" value="<%= venda.valor_total %>" required>
+
+            <input type="submit" value="Atualizar">
+        </form>
+        <a href="/api/vendas">Voltar</a>
+    </div>
+</body>
+</html>

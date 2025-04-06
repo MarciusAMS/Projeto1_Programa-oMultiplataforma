@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Consultar Vendas</title>
+    <link rel="stylesheet" href="/css/vendas/consultaVendas.css">
+</head>
+<body>
+    <h1>Lista de Vendas</h1>
+
+    <div class="botoes-topo">
+        <a href="/api/vendas/novo">➕ Adicionar Venda</a>
+        <a href="/api/menu" class="btn-voltar">⬅️ Voltar ao Menu</a>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>ID do Cliente</th>
+                <th>Data da Venda</th>
+                <th>Valor Total</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% venda.forEach(venda => { %>
+                <tr>
+                    <td><%= venda.id %></td>
+                    <td><%= venda.cliente_id %></td>
+                    <td><%= venda.data_venda %></td>
+                    <td>R$ <%= venda.valor_total.toFixed(2) %></td>
+                    <td>
+                        <a href="/api/vendas/<%= venda.id %>">Editar</a>
+                        <form action="/api/vendas/excluir/<%= venda.id %>?_method=DELETE" method="POST" onsubmit="return confirm('Tem certeza que deseja excluir?');">
+                            <button type="submit">Excluir</button>
+                        </form>
+                    </td>
+                </tr>
+            <% }) %>
+        </tbody>
+    </table>
+</body>
+</html>

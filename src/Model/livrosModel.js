@@ -44,7 +44,7 @@ const Livros = sequelize.define('Livros', {
     quantidade_estoque: {
         type: DataTypes.INTEGER,
         allowNull: false,
-    },
+    }
 });
 
 sequelize.sync()

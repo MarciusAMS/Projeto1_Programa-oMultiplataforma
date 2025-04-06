@@ -27,7 +27,7 @@ const Vendas = sequelize.define('Vendas', {
         }
     },
     data_venda: {
-        type: DataTypes.DATE,
+        type: DataTypes.STRING,
         allowNull: false,
     },
     valor_total: {
