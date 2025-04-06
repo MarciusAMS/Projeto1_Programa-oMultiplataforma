@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Livros</title>
+    <link rel="stylesheet" href="/css/livros/consultaLivros.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Lista de Livros</h1>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Título</th>
+                    <th>Autor</th>
+                    <th>Editora</th>
+                    <th>Ano</th>
+                    <th>ISBN</th>
+                    <th>Preço</th>
+                    <th>Estoque</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% livros.forEach(livro => { %>
+                    <tr>
+                        <td><%= livro.id %></td>
+                        <td><%= livro.titulo %></td>
+                        <td><%= livro.autor %></td>
+                        <td><%= livro.editora %></td>
+                        <td><%= livro.ano_publicacao %></td>
+                        <td><%= livro.isbn %></td>
+                        <td>R$ <%= livro.preco.toFixed(2) %></td>
+                        <td><%= livro.quantidade_estoque %></td>
+                        <td>
+                            <a href="/api/livros/<%= livro.id %>" class="editar">Editar</a>
+                            <form action="/api/livros/excluir/<%= livro.id %>?_method=DELETE" method="POST" class="form-excluir" onsubmit="return confirm('Tem certeza que deseja excluir?');">
+                                <button type="submit">Excluir</button>
+                            </form>
+                        </td>
+                    </tr>
+                <% }); %>
+            </tbody>
+        </table>
+
+        <a class="btn-novo" href="/api/livros/novo">➕ Adicionar Novo Livro</a>
+        <a class="btn-voltar" href="/api/menu">⬅️ Voltar ao Menu Principal</a>
+    </div>
+</body>
+</html>

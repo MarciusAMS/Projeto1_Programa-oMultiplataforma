@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clientes</title>
+    <link rel="stylesheet" href="/css/clientes/consultaClientes.css">
+</head>
+<body>
+    <h1>Lista de Clientes</h1>
+    <table border="1">
+        <tr>
+            <th>ID</th>
+            <th>Nome</th>
+            <th>Endereço</th>
+            <th>Telefone</th>
+            <th>Email</th>
+            <th>Ações</th>
+        </tr>
+        <% clientes.forEach(cliente => { %>
+            <tr>
+                <td><%= cliente.id %></td>
+                <td><%= cliente.nome %></td>
+                <td><%= cliente.endereco %></td>
+                <td><%= cliente.telefone %></td>
+                <td><%= cliente.email %></td>
+                <td>
+                    <a href="/api/clientes/<%= cliente.id %>">Editar</a>
+                    <form action="/api/clientes/excluir/<%= cliente.id %>?_method=DELETE" method="POST" style="display:inline;">
+                        <button type="submit">Excluir</button>
+                    </form>
+                </td>
+            </tr>
+        <% }); %>
+    </table>
+    <br>
+    <a href="/api/clientes/novo">Adicionar Cliente</a>
+    <a class="btn-voltar" href="/api/menu"> Voltar ao Menu Principal</a>
+</body>
+</html>

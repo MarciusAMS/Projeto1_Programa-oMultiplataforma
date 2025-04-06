@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Itens das Vendas</title>
+    <link rel="stylesheet" href="/css/itens/consultaItens.css">
+</head>
+<body>
+    <h1>Itens das Vendas</h1>
+    <a class="add-btn" href="/api/itens/novo">Adicionar Novo Item</a>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>ID Venda</th>
+                <th>ID Livro</th>
+                <th>Quantidade</th>
+                <th>Preço Unitário</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% itens.forEach(item => { %>
+                <tr>
+                    <td><%= item.id %></td>
+                    <td><%= item.venda_id %></td>
+                    <td><%= item.livro_id %></td>
+                    <td><%= item.quantidade %></td>
+                    <td>R$ <%= parseFloat(item.preco_unitario).toFixed(2) %></td>
+                    <td class="actions">
+                        <a href="/api/itens/<%= item.id %>">Editar</a>
+                        <form action="/api/itens/excluir/<%= item.id %>?_method=DELETE" method="POST" onsubmit="return confirm('Tem certeza que deseja excluir este item?')">
+                            <button type="submit">Excluir</button>
+                        </form>
+                    </td>
+                </tr>
+            <% }) %>
+        </tbody>
+    </table>
+
+    <a href="/api/menu" class="voltar-btn">Voltar ao Menu</a>
+</body>
+</html>
