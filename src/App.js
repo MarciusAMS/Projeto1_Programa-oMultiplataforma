@@ -1,13 +1,12 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const clientesRoutes = require('./src/Routes/clientesRoutes');
-const vendasRoutes = require('./src/Routes/vendasRoutes');
-const livrosRoutes = require('./src/Routes/livrosRoutes');
-const itemVendaRoutes = require('./src/Routes/itemVendaRoutes');
-const sequelize = require('./src/Model/clientesModel');
+const clientesRoutes = require('./Routes/clientesRoutes');
+const vendasRoutes = require('./Routes/vendasRoutes');
+const livrosRoutes = require('./Routes/livrosRoutes');
+const itemVendaRoutes = require('./Routes/itemVendaRoutes');
+const sequelize = require('./Model/clientesModel');
 const path = require('path');
 const methodOverride = require('method-override');
-
 
 const app = express();
 const port = 3000;
