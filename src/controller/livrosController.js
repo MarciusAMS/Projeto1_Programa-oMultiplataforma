@@ -2,21 +2,20 @@ const Livros = require('../Model/livrosModel');
 
 exports.listarLivros = async (req, res) => {
     const livros = await Livros.findAll();
-    res.render(livros);
-}
+    res.render('livros/consultaLivros', { livros: livros || [] });
+};
 
 
 exports.adicionarLivro = async (req, res) => {
-    const { id } = req.body;
-    const livros = await Livros.create({ id });
-    res.render(livros);
+    const { titulo, autor, editora, ano_publicacao, isbn, preco, quantidade_estoque } = req.body;
+     await Livros.create({ titulo, autor, editora, ano_publicacao, isbn, preco, quantidade_estoque });
+    res.redirect('/api/livros');
 } 
-
 
 exports.editarLivro = async (req, res) => {
     const { id } = req.params;
     const livros = await Livros.findByPk(id);
-    res.render('editarLivro', { livros });
+    res.render('livros/editarLivros', { livro: livros });
 };
 
 
@@ -24,13 +23,15 @@ exports.alterarLivro = async (req, res) => {
     const { id } = req.params;
     const { titulo, autor, editora, ano_publicacao, isbn, preco, quantidade_estoque } = req.body;
     await Livros.update({ titulo, autor, editora, ano_publicacao, isbn, preco, quantidade_estoque }, { where: { id } });
-    res.redirect('/livros');
+    res.redirect('/api/livros');
 };
 
 
-exports.excluirCliente = async (req, res) => {
+exports.excluirLivro = async (req, res) => {
     const { id } = req.params;
-    await Cliente.destroy({ where: { id } });
-    res.redirect('/livros');
+    await Livros.destroy({ where: { id } });
+    res.redirect('/api/livros');
 };
+
+
 
