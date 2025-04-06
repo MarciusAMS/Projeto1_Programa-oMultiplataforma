@@ -5,7 +5,7 @@ const vendasRoutes = require('./Routes/vendasRoutes');
 const livrosRoutes = require('./Routes/livrosRoutes');
 const itemVendaRoutes = require('./Routes/itemVendaRoutes');
 const menuRoutes = require('./Routes/menuRoutes');
-const sequelize = require('./Model/clientesModel');
+const { conexao } = require('./Model/indexModel');
 const path = require('path');
 const methodOverride = require('method-override');
 
@@ -26,7 +26,7 @@ app.use('/api/livros', livrosRoutes);
 app.use('/api/itens', itemVendaRoutes);
 app.use('/api/menu', menuRoutes);
 
-sequelize.sync().then(() => {
+conexao.sync().then(() => {
     console.log('Banco de dados sincronizado!');
 }).catch(err => console.log('Erro ao sincronizar com o banco: ', err));
 
