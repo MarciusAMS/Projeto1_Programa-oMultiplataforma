@@ -1,4 +1,5 @@
 const Livros = require('../Model/livrosModel');
+const ItemVenda = require('../Model/item_vendaModel');
 
 exports.listarLivros = async (req, res) => {
     const livros = await Livros.findAll();
@@ -29,9 +30,16 @@ exports.alterarLivro = async (req, res) => {
 
 exports.excluirLivro = async (req, res) => {
     const { id } = req.params;
+    const itemVendas = await ItemVenda.findOne({ where: { livro_id: id } });
+
+    if (itemVendas) {
+  return res.status(400).send("Não é possível excluir: o livro já foi vendido.");
+    }
+
     await Livros.destroy({ where: { id } });
     res.redirect('/api/livros');
 };
+
 
 
 

@@ -6,7 +6,6 @@ const clientesController = require('../controller/clientesController');
 // Quando necessitar manipular os valores do banco usar POST, PUT, DELETE, etc.
 
 router.get('/novo', (req, res) => {res.render('clientes/adicionarCliente'); });
-
 router.get('/', clientesController.listarClientes);
 router.post('/novo', clientesController.adicionarCliente);
 router.get('/:id', clientesController.editarCliente);
